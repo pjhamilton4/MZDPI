@@ -1,7 +1,11 @@
 #!/bin/sh
 
+echo "Starting script"
+
 do_dts_dtb() {
 # now create dts file
+echo "Creating dts file"
+
 cat <<\EOF > /boot/overlays/mzdpi.dts && 
 /dts-v1/;
 
@@ -61,6 +65,10 @@ cat <<\EOF > /boot/overlays/mzdpi.dts &&
 	};
 };
 EOF
+
+echo "Finished creating file"
+
+
 dtc -W no-gpios_property -W no-clocks_property -W no-unique_unit_address -W no-avoid_unnecessary_addr_size -W no-unit_address_vs_reg -I dts -O dtb -o /boot/overlays/mzdpi.dtbo /boot/overlays/mzdpi.dts
 }
 
@@ -91,6 +99,8 @@ fi
 
 apt-get install -y matchbox-keyboard
 
+echo "Starting rpi 0 w install"
+
 DTBFILE=/boot/bcm2708-rpi-0-w.dtb
 if [ -f "$DTBFILE" ];then
 	dtc -W no-gpios_property -W no-clocks_property -W no-unique_unit_address -W no-avoid_unnecessary_addr_size -W no-unit_address_vs_reg -I dtb -O dts -o /boot/tmp.dts $DTBFILE
@@ -106,6 +116,7 @@ if [ -f "$DTBFILE" ];then
 	rm /boot/tmp.dts
 fi
 
+echo "Starting rpi 0 install"
 
 DTBFILE=/boot/bcm2708-rpi-0.dtb
 if [ -f "$DTBFILE" ];then
@@ -121,6 +132,9 @@ if [ -f "$DTBFILE" ];then
 	fi
 	rm /boot/tmp.dts
 fi
+
+echo "Starting rpi zero w install"
+
 DTBFILE=/boot/bcm2708-rpi-zero-w.dtb
 if [ -f "$DTBFILE" ];then
 	dtc -W no-gpios_property -W no-clocks_property -W no-unique_unit_address -W no-avoid_unnecessary_addr_size -W no-unit_address_vs_reg -I dtb -O dts -o /boot/tmp.dts $DTBFILE
@@ -135,6 +149,8 @@ if [ -f "$DTBFILE" ];then
 	fi
 	rm /boot/tmp.dts
 fi
+
+echo "Starting rpi zero install"
 
 
 DTBFILE=/boot/bcm2708-rpi-zero.dtb
@@ -152,6 +168,8 @@ if [ -f "$DTBFILE" ];then
 	rm /boot/tmp.dts
 fi
 
+echo "Starting rpi b plus install"
+
 DTBFILE=/boot/bcm2708-rpi-b-plus.dtb
 if [ -f "$DTBFILE" ];then
 	dtc -W no-gpios_property -W no-clocks_property -W no-unique_unit_address -W no-avoid_unnecessary_addr_size -W no-unit_address_vs_reg -I dtb -O dts -o /boot/tmp.dts $DTBFILE
@@ -166,6 +184,8 @@ if [ -f "$DTBFILE" ];then
 	fi
 	rm /boot/tmp.dts
 fi
+
+echo "Starting rpi cm install"
 
 DTBFILE=/boot/bcm2708-rpi-cm.dtb
 if [ -f "$DTBFILE" ];then
@@ -183,6 +203,8 @@ if [ -f "$DTBFILE" ];then
 	rm /boot/tmp.dts
 fi
 
+echo "Starting rpi 2 b install"
+
 DTBFILE=/boot/bcm2709-rpi-2-b.dtb
 if [ -f "$DTBFILE" ];then
 	dtc -W no-gpios_property -W no-clocks_property -W no-unique_unit_address -W no-avoid_unnecessary_addr_size -W no-unit_address_vs_reg -I dtb -O dts -o /boot/tmp.dts $DTBFILE
@@ -197,6 +219,8 @@ if [ -f "$DTBFILE" ];then
 	fi
 	rm /boot/tmp.dts
 fi
+
+echo "Starting rpi 3 b install"
 
 DTBFILE=/boot/bcm2710-rpi-3-b.dtb
 if [ -f "$DTBFILE" ];then
@@ -213,6 +237,10 @@ if [ -f "$DTBFILE" ];then
 	rm /boot/tmp.dts
 fi
 
+
+echo "Starting rpi 3 b + install"
+
+
 DTBFILE=/boot/bcm2710-rpi-3-b-plus.dtb
 if [ -f "$DTBFILE" ];then
 	dtc -W no-gpios_property -W no-clocks_property -W no-unique_unit_address -W no-avoid_unnecessary_addr_size -W no-unit_address_vs_reg -I dtb -O dts -o /boot/tmp.dts $DTBFILE
@@ -227,6 +255,8 @@ if [ -f "$DTBFILE" ];then
 	fi
 	rm /boot/tmp.dts
 fi
+
+echo "Starting rpi cm3 install"
 
 DTBFILE=/boot/bcm2710-rpi-cm3.dtb
 if [ -f "$DTBFILE" ];then
@@ -245,6 +275,8 @@ fi
 
 do_create_conf
 do_dts_dtb
+
+echo "Starting config outputs"
 
 cp /boot/config.txt /boot/tmp.txt
 
